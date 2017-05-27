@@ -9,16 +9,13 @@ namespace Snake
 	
 	public class Game : MonoBehaviour {
 
-		Snake mSnake = new Snake ();
-		Tile[] mTiles = null;
-		int mLevelHeight = 0;
-		int mLevelWidth = 0;
+		TileMap mTiles = new TileMap();
 
 		// Use this for initialization
 		void Start () {
 			LoadLevel ();
 		}
-		
+
 		// Update is called once per frame
 		void Update () {
 			
@@ -32,12 +29,7 @@ namespace Snake
 			int levelCount = levelTuning ["Levels"].Count;
 			Debug.Assert (playerLevel <= levelCount);
 
-			mLevelHeight = levelTuning ["Levels"] [playerLevel] ["W"].AsInt;
-			mLevelWidth = levelTuning ["Levels"] [playerLevel] ["H"].AsInt;
-
-			mTiles = Tile.CreateMap (mLevelWidth, mLevelHeight);
-
-			mSnake.SpawnSnake (mTiles, 0, 0);
+			mTiles.InitMap (levelTuning ["Levels"] [playerLevel]);
 		}
 	}
 }
