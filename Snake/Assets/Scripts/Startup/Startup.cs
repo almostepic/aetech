@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using SimpleJSON;
+using Singletons;
 
 public class Startup : MonoBehaviour {
 
@@ -10,6 +12,8 @@ public class Startup : MonoBehaviour {
 		// Init singletons
 		PlayerStats.Initialize();
 		PlayerStats.Instance.LoadStats ();
+		Tuning.Initialize ();
+		Tuning.Instance.LoadTuningFromDisk (); // should come from the web
 
 		// transition to the next scene
 		SceneManager.LoadScene("Game", LoadSceneMode.Single);

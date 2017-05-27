@@ -2,21 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerStats : Singleton<PlayerStats> {
-	// this should just be a JSON doc from dynamo
-	public int level {get; set;}
-	public int highestScore {get; set;}
+namespace Singletons
+{
+	public class PlayerStats : Singleton<PlayerStats> {
+		// this should just be a JSON doc from dynamo
+		public int level {get; set;}
+		public int highestScore {get; set;}
 
-	protected PlayerStats() {
-		ResetStats ();
-	}
-		
-	public void LoadStats() {
-		Debug.Log ("LoadStats");
-	}
+		protected PlayerStats() {
+			ResetStats ();
+		}
+			
+		public void LoadStats() {
+			Debug.Log ("LoadStats");
+		}
 
-	public void ResetStats() {
-		level = 0;
-		highestScore = 0;
+		public void ResetStats() {
+			level = 0;
+			highestScore = 0;
+		}
 	}
 }
