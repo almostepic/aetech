@@ -10,6 +10,7 @@ namespace Snake
 	public class Game : MonoBehaviour {
 
 		TileMap mTiles = new TileMap();
+		Snake mSnake = new Snake();
 
 		// Use this for initialization
 		void Start () {
@@ -25,11 +26,14 @@ namespace Snake
 			int playerLevel = PlayerStats.Instance.level;
 
 			JSONNode levelTuning = Tuning.Instance.Get ("levels");
+			JSONNode gameTuning = Tuning.Instance.Get ("game");
 
 			int levelCount = levelTuning ["Levels"].Count;
 			Debug.Assert (playerLevel <= levelCount);
 
-			mTiles.InitMap (levelTuning ["Levels"] [playerLevel]);
+			JSONNode level = levelTuning ["Levels"] [playerLevel];
+			mTiles.Init (level);
+			mSnake.Init (level, gameTuning["Difficulty"][PlayerStats.Instance.difficulty], mTiles);
 		}
 	}
 }

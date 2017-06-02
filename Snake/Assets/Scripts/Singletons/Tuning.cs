@@ -14,6 +14,7 @@ namespace Singletons
 		{
 			// these should be cached from a the web either in memory on disk
 			LoadTuningFile("levels");
+			LoadTuningFile ("game");
 		}
 
 		public JSONNode Get(string tuningName)

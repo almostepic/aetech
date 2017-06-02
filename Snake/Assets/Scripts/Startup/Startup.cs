@@ -10,10 +10,10 @@ public class Startup : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		// Init singletons
-		PlayerStats.Initialize();
-		PlayerStats.Instance.LoadStats ();
 		Tuning.Initialize ();
 		Tuning.Instance.LoadTuningFromDisk (); // should come from the web
+		PlayerStats.Initialize();
+		PlayerStats.Instance.LoadStats ();
 
 		// transition to the next scene
 		SceneManager.LoadScene("Game", LoadSceneMode.Single);

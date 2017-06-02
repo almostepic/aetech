@@ -2,6 +2,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.IO;
+using SimpleJSON;
 
 namespace Snake
 {
@@ -12,15 +13,38 @@ namespace Snake
 		public int Count { get; private set; }
 
 		Tile[] mTiles;
-		GameObject mSnakeHead;
-		GameObject mSnakeTail;
-		List<GameObject> mSnakeBody;
+
 
 		public TileMap ()
 		{
 		}
 
-		public void InitMap(SimpleJSON.JSONNode level)
+		~TileMap()
+		{
+		}
+
+		public Tile GetTile(int x, int y)
+		{
+			if(x >= Width || x < 0)
+				return null;
+			if(y >= Height || y < 0)
+				return null;
+			return mTiles [y * Width + x];
+		}
+
+		public Tile GetTile(Vector2 xy)
+		{
+			return GetTile ((int)xy.x, (int)xy.y);
+		}
+
+		public Tile GetTile(int tileNumber)
+		{
+			if(tileNumber >= Count || tileNumber < 0)
+				return null;
+			return mTiles[tileNumber];
+		}
+
+		public void Init(JSONNode level)
 		{
 			Width = level ["W"].AsInt;
 			Height = level ["H"].AsInt;
@@ -39,34 +63,7 @@ namespace Snake
 				mTiles [i] = new Tile ();
 				mTiles [i].SetTile ((i % Width) + xOffset, (i / Width) + yOffset, i);
 			}
-
-			// init the snake
-			int snakeSpawnX = level["Spawn"]["X"].AsInt;
-			int snakeSpawnY = level ["Spawn"] ["Y"].AsInt;
-
-			// todo: error check that the snake can actually fit in a straight line
-			// todo: move to snake body class
-			int snakeTileNumber = (snakeSpawnX * Width) + snakeSpawnY;
-			mSnakeBody = new List<GameObject> ();
-
-
-			mSnakeHead = UnityEngine.Object.Instantiate (Resources.Load (Path.Combine ("Prefabs", "snake_head")), 
-				new Vector3(mTiles[snakeTileNumber].XPos, mTiles[snakeTileNumber].YPos, -1.0f), 
-				Quaternion.identity) as GameObject;
-			--snakeTileNumber;
-			mSnakeBody.Add(UnityEngine.Object.Instantiate (Resources.Load (Path.Combine ("Prefabs", "snake_body")), 
-				new Vector3(mTiles[snakeTileNumber].XPos, mTiles[snakeTileNumber].YPos, -1.0f), 
-				Quaternion.identity) as GameObject);
-			--snakeTileNumber;
-			mSnakeTail = UnityEngine.Object.Instantiate (Resources.Load (Path.Combine ("Prefabs", "snake_tail")), 
-				new Vector3(mTiles[snakeTileNumber].XPos, mTiles[snakeTileNumber].YPos, -1.0f), 
-				Quaternion.identity) as GameObject;
 		}
-
-		public void MoveSnake()
-		{
-		}
-
 	}
 
 }

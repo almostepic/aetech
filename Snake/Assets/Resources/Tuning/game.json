@@ -1,0 +1,19 @@
+{
+    "DifficultyList": [
+        "easy",
+        "medium",
+        "hard"
+    ],
+    "Difficulty": {
+        "easy": {
+            "SnakeSpeed": 10
+        },
+        "medium": {
+            "SnakeSpeed": 15
+        },
+        "hard": {
+            "SnakeSpeed": 20
+        }
+    }
+
+}

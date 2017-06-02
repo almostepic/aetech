@@ -8,6 +8,7 @@ namespace Singletons
 		// this should just be a JSON doc from dynamo
 		public int level {get; set;}
 		public int highestScore {get; set;}
+		public string difficulty { get; set; }
 
 		protected PlayerStats() {
 			ResetStats ();
@@ -20,6 +21,7 @@ namespace Singletons
 		public void ResetStats() {
 			level = 0;
 			highestScore = 0;
+			difficulty = Tuning.Instance.Get ("game") ["DifficultyList"] [0];
 		}
 	}
 }
