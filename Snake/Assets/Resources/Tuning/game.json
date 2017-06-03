@@ -1,18 +1,21 @@
 {
     "DifficultyList": [
-        "easy",
-        "medium",
-        "hard"
+        "Easy",
+        "Medium",
+        "Hard"
     ],
     "Difficulty": {
-        "easy": {
-            "SnakeSpeed": 10
+        "Easy": {
+            "SnakeSpeed": 5,
+            "BasePoints": 30
         },
-        "medium": {
-            "SnakeSpeed": 15
+        "Medium": {
+            "SnakeSpeed": 10,
+            "BasePoints": 60
         },
-        "hard": {
-            "SnakeSpeed": 20
+        "Hard": {
+            "SnakeSpeed": 15,
+            "BasePoints": 90
         }
     }
 

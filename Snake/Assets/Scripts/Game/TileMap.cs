@@ -32,11 +32,6 @@ namespace Snake
 			return mTiles [y * Width + x];
 		}
 
-		public Tile GetTile(Vector2 xy)
-		{
-			return GetTile ((int)xy.x, (int)xy.y);
-		}
-
 		public Tile GetTile(int tileNumber)
 		{
 			if(tileNumber >= Count || tileNumber < 0)
@@ -46,22 +41,29 @@ namespace Snake
 
 		public void Init(JSONNode level)
 		{
-			Width = level ["W"].AsInt;
-			Height = level ["H"].AsInt;
+			Width = level ["Width"].AsInt;
+			Height = level ["Height"].AsInt;
+			const float tileWidth = 1;
+			const float tileHeight = 1;
 			Count = Width * Height;
 
 			mTiles = new Tile[Count];
 
 			// figure out the position of the top left side
-			int xOffset =  -(Width / 2);
-			int yOffset = -(Height / 2);
+			float xOffset =  -((float)Width * 0.5f) + tileWidth * 0.5f;
+			float yOffset = ((float)Height * 0.5f) - tileHeight * 0.5f;
 
-			// init the tiles
+
+
 			for (int i = 0; i < Count; ++i)
 			{
-				// handle 'Dead' tiles
-				mTiles [i] = new Tile ();
-				mTiles [i].SetTile ((i % Width) + xOffset, (i / Width) + yOffset, i);
+				mTiles [i] = new Tile (
+					xOffset + ((i % Width) * tileWidth),
+					yOffset - ((i / Width) * tileHeight),
+					i % Width,
+					i / Width,
+					i
+				);
 			}
 		}
 	}

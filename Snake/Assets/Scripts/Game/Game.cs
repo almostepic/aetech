@@ -19,7 +19,8 @@ namespace Snake
 
 		// Update is called once per frame
 		void Update () {
-			
+			mSnake.HandleInput ();
+			mSnake.Update (mTiles);
 		}
 
 		void LoadLevel() {
