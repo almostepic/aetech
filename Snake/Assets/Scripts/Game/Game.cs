@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using SimpleJSON;
 using Singletons;
+using Util;
 
 namespace Snake
 {
 	
-	public class Game : MonoBehaviour {
+	public class Game : ViewportHandler {
 
 		TileMap mTiles = new TileMap();
 		Snake mSnake = new Snake();
@@ -38,3 +39,4 @@ namespace Snake
 		}
 	}
 }
+
