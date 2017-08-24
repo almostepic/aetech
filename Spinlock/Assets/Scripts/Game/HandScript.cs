@@ -8,12 +8,12 @@ public class HandScript : MonoBehaviour
 	{
 	}
 
-	void OnTriggerEnter(Collider other)
+	void OnTriggerEnter2D(Collider2D other)
 	{
 		isColliding = true;
 	}
 
-	void OnTriggerExit(Collider other)
+	void OnTriggerExit2D(Collider2D other)
 	{
 		isColliding = false;
 	}
