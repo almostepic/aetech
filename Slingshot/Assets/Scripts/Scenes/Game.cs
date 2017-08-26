@@ -110,13 +110,12 @@ public class Game : MonoBehaviour {
 				return;
 			
 			screenHeightPct = Mathf.Min (screenHeightPct, tuning ["MaxFlickScreenPct"].AsFloat);
-			float power = tuning ["MaxFlickPower"].AsFloat * (screenHeightPct / tuning ["MaxFlickScreenPct"].AsFloat);
+			float power = Mathf.Max(tuning ["MaxFlickPower"].AsFloat * (screenHeightPct / tuning ["MaxFlickScreenPct"].AsFloat), tuning["MinFlickPower"].AsFloat);
 			ballRigid.useGravity = true;
 
 			//print (power);
 			dir.z = dir.y;
-			dir.y *= tuning["FlickYBias"].AsFloat;
-			dir.y *= power * 0.4f;
+			dir.y *= power * tuning["FlickYBias"].AsFloat;
 			dir.x *= power;
 			ballRigid.AddRelativeForce (dir + Vector3.forward * power);
 
@@ -162,10 +161,16 @@ public class Game : MonoBehaviour {
 			if (Input.GetMouseButtonUp (0))
 			{
 				isTouching = false;
-				// launch that bitch
-				state = GameState.WaitingForCollision;
-				ballRigid.useGravity = true;
-				ballRigid.AddRelativeForce (Vector3.forward * Mathf.Max(tuning ["SlingMaxPower"].AsFloat * yPct, tuning["SlingMinPower"].AsFloat));
+				if (yDiff > 0.0f)
+				{
+					// launch that bitch
+					state = GameState.WaitingForCollision;
+					ballRigid.useGravity = true;
+					ballRigid.AddRelativeForce (Vector3.forward * Mathf.Max (tuning ["SlingMaxPower"].AsFloat * yPct, tuning ["SlingMinPower"].AsFloat));
+				} else
+				{
+					ResetBall ();
+				}
 			}
 		}
 	}
