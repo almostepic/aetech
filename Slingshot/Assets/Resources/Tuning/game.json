@@ -1,0 +1,14 @@
+{
+    "BallSpawn": [0, -1, -5],
+	"BallRotation": [-45, 0, 0],
+	"MinFlickScreenPct": 0.05,
+	"MaxFlickScreenPct": 0.75,
+	"MaxFlickPower": 1000,
+	"FlickYBias": 0.1,
+	"SlingMaxPullPosZ": -7.75,
+	"SlingMaxRotateY": 50,
+	"SlingMaxPower": 1250,
+	"SlingMinPower": 250,
+	"SlingMaxYScreenPct": 0.3,
+	"SlingMaxXScreenPct": 0.3
+}
